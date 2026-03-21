@@ -1,0 +1,121 @@
+role,skills_required,skill_level,category
+Full Stack Developer,Python|JavaScript|TypeScript|Java|Go|Rust,Intermediate,Software Development
+Backend Developer,C#|C++|SQL|NoSQL|React|Vue,Intermediate,Software Development
+Frontend Developer,Angular|Node.js|Express|FastAPI|Django|Flask,Intermediate,Software Development
+API Developer,MongoDB|PostgreSQL|MySQL|Redis|Kafka|RabbitMQ,Intermediate,Software Development
+Microservices Engineer,Docker|Kubernetes|Terraform|AWS|Azure|GCP,Intermediate,Software Development
+Web Platform Engineer,CI/CD|Git|Linux|System Design|Microservices|GraphQL,Intermediate,Software Development
+Dev Productivity Engineer,REST API|NLP|Computer Vision|MLOps|Data Modeling|ETL,Intermediate,Software Development
+UI Engineer,Feature Engineering|Pandas|NumPy|scikit-learn|PyTorch|TensorFlow,Intermediate,Software Development
+Integration Engineer,Prompt Engineering|Frontend Fundamentals|Frontend Fundamentals Advanced|Frontend Fundamentals Lab|Frontend Design|Frontend Design Advanced,Intermediate,Software Development
+Application Engineer,Frontend Design Lab|Frontend Implementation|Frontend Implementation Advanced|Frontend Implementation Lab|Frontend Optimization|Frontend Optimization Advanced,Intermediate,Software Development
+Data Scientist,Frontend Optimization Lab|Frontend Monitoring|Frontend Monitoring Advanced|Frontend Monitoring Lab|Frontend Automation|Frontend Automation Advanced,Intermediate,Data & AI
+Machine Learning Engineer,Frontend Automation Lab|Frontend Scaling|Frontend Scaling Advanced|Frontend Scaling Lab|Frontend Governance|Frontend Governance Advanced,Intermediate,Data & AI
+NLP Engineer,Frontend Governance Lab|Frontend Operations|Frontend Operations Advanced|Frontend Operations Lab|Frontend Debugging|Frontend Debugging Advanced,Intermediate,Data & AI
+AI Research Engineer,Frontend Debugging Lab|Frontend Integration|Frontend Integration Advanced|Frontend Integration Lab|Frontend Best Practices|Frontend Best Practices Advanced,Intermediate,Data & AI
+MLOps Engineer,Frontend Best Practices Lab|Backend Fundamentals|Backend Fundamentals Advanced|Backend Fundamentals Lab|Backend Design|Backend Design Advanced,Intermediate,Data & AI
+Data Engineer,Backend Design Lab|Backend Implementation|Backend Implementation Advanced|Backend Implementation Lab|Backend Optimization|Backend Optimization Advanced,Intermediate,Data & AI
+Applied Scientist,Backend Optimization Lab|Backend Monitoring|Backend Monitoring Advanced|Backend Monitoring Lab|Backend Automation|Backend Automation Advanced,Intermediate,Data & AI
+Analytics Engineer,Backend Automation Lab|Backend Scaling|Backend Scaling Advanced|Backend Scaling Lab|Backend Governance|Backend Governance Advanced,Intermediate,Data & AI
+Prompt Engineer,Backend Governance Lab|Backend Operations|Backend Operations Advanced|Backend Operations Lab|Backend Debugging|Backend Debugging Advanced,Intermediate,Data & AI
+AI Quality Engineer,Backend Debugging Lab|Backend Integration|Backend Integration Advanced|Backend Integration Lab|Backend Best Practices|Backend Best Practices Advanced,Intermediate,Data & AI
+DevOps Engineer,Backend Best Practices Lab|Data Fundamentals|Data Fundamentals Advanced|Data Fundamentals Lab|Data Design|Data Design Advanced,Intermediate,Cloud & DevOps
+Cloud Engineer,Data Design Lab|Data Implementation|Data Implementation Advanced|Data Implementation Lab|Data Optimization|Data Optimization Advanced,Intermediate,Cloud & DevOps
+Site Reliability Engineer,Data Optimization Lab|Data Monitoring|Data Monitoring Advanced|Data Monitoring Lab|Data Automation|Data Automation Advanced,Intermediate,Cloud & DevOps
+Platform Engineer,Data Automation Lab|Data Scaling|Data Scaling Advanced|Data Scaling Lab|Data Governance|Data Governance Advanced,Intermediate,Cloud & DevOps
+Infrastructure Engineer,Data Governance Lab|Data Operations|Data Operations Advanced|Data Operations Lab|Data Debugging|Data Debugging Advanced,Intermediate,Cloud & DevOps
+Kubernetes Engineer,Data Debugging Lab|Data Integration|Data Integration Advanced|Data Integration Lab|Data Best Practices|Data Best Practices Advanced,Intermediate,Cloud & DevOps
+Release Engineer,Data Best Practices Lab|Cloud Fundamentals|Cloud Fundamentals Advanced|Cloud Fundamentals Lab|Cloud Design|Cloud Design Advanced,Intermediate,Cloud & DevOps
+Observability Engineer,Cloud Design Lab|Cloud Implementation|Cloud Implementation Advanced|Cloud Implementation Lab|Cloud Optimization|Cloud Optimization Advanced,Intermediate,Cloud & DevOps
+Build Engineer,Cloud Optimization Lab|Cloud Monitoring|Cloud Monitoring Advanced|Cloud Monitoring Lab|Cloud Automation|Cloud Automation Advanced,Intermediate,Cloud & DevOps
+Cloud Security Engineer,Cloud Automation Lab|Cloud Scaling|Cloud Scaling Advanced|Cloud Scaling Lab|Cloud Governance|Cloud Governance Advanced,Intermediate,Cloud & DevOps
+Security Engineer,Cloud Governance Lab|Cloud Operations|Cloud Operations Advanced|Cloud Operations Lab|Cloud Debugging|Cloud Debugging Advanced,Intermediate,Security
+Application Security Engineer,Cloud Debugging Lab|Cloud Integration|Cloud Integration Advanced|Cloud Integration Lab|Cloud Best Practices|Cloud Best Practices Advanced,Intermediate,Security
+Cloud Security Analyst,Cloud Best Practices Lab|Security Fundamentals|Security Fundamentals Advanced|Security Fundamentals Lab|Security Design|Security Design Advanced,Intermediate,Security
+Threat Detection Engineer,Security Design Lab|Security Implementation|Security Implementation Advanced|Security Implementation Lab|Security Optimization|Security Optimization Advanced,Intermediate,Security
+IAM Engineer,Security Optimization Lab|Security Monitoring|Security Monitoring Advanced|Security Monitoring Lab|Security Automation|Security Automation Advanced,Intermediate,Security
+SOC Analyst,Security Automation Lab|Security Scaling|Security Scaling Advanced|Security Scaling Lab|Security Governance|Security Governance Advanced,Intermediate,Security
+Security Automation Engineer,Security Governance Lab|Security Operations|Security Operations Advanced|Security Operations Lab|Security Debugging|Security Debugging Advanced,Intermediate,Security
+Incident Response Engineer,Security Debugging Lab|Security Integration|Security Integration Advanced|Security Integration Lab|Security Best Practices|Security Best Practices Advanced,Intermediate,Security
+Risk & Compliance Engineer,Security Best Practices Lab|DevOps Fundamentals|DevOps Fundamentals Advanced|DevOps Fundamentals Lab|DevOps Design|DevOps Design Advanced,Intermediate,Security
+Penetration Tester,DevOps Design Lab|DevOps Implementation|DevOps Implementation Advanced|DevOps Implementation Lab|DevOps Optimization|DevOps Optimization Advanced,Intermediate,Security
+Product Manager,DevOps Optimization Lab|DevOps Monitoring|DevOps Monitoring Advanced|DevOps Monitoring Lab|DevOps Automation|DevOps Automation Advanced,Intermediate,Product & Strategy
+Technical Product Manager,DevOps Automation Lab|DevOps Scaling|DevOps Scaling Advanced|DevOps Scaling Lab|DevOps Governance|DevOps Governance Advanced,Intermediate,Product & Strategy
+Growth Product Manager,DevOps Governance Lab|DevOps Operations|DevOps Operations Advanced|DevOps Operations Lab|DevOps Debugging|DevOps Debugging Advanced,Intermediate,Product & Strategy
+Data Product Manager,DevOps Debugging Lab|DevOps Integration|DevOps Integration Advanced|DevOps Integration Lab|DevOps Best Practices|DevOps Best Practices Advanced,Intermediate,Product & Strategy
+AI Product Manager,DevOps Best Practices Lab|AI Fundamentals|AI Fundamentals Advanced|AI Fundamentals Lab|AI Design|AI Design Advanced,Intermediate,Product & Strategy
+Business Analyst,AI Design Lab|AI Implementation|AI Implementation Advanced|AI Implementation Lab|AI Optimization|AI Optimization Advanced,Intermediate,Product & Strategy
+Technology Strategist,AI Optimization Lab|AI Monitoring|AI Monitoring Advanced|AI Monitoring Lab|AI Automation|AI Automation Advanced,Intermediate,Product & Strategy
+Solution Consultant,AI Automation Lab|AI Scaling|AI Scaling Advanced|AI Scaling Lab|AI Governance|AI Governance Advanced,Intermediate,Product & Strategy
+Program Manager,AI Governance Lab|AI Operations|AI Operations Advanced|AI Operations Lab|AI Debugging|AI Debugging Advanced,Intermediate,Product & Strategy
+Innovation Manager,AI Debugging Lab|AI Integration|AI Integration Advanced|AI Integration Lab|AI Best Practices|AI Best Practices Advanced,Intermediate,Product & Strategy
+Android Developer,AI Best Practices Lab|Product Fundamentals|Product Fundamentals Advanced|Product Fundamentals Lab|Product Design|Product Design Advanced,Intermediate,Mobile Development
+iOS Developer,Product Design Lab|Product Implementation|Product Implementation Advanced|Product Implementation Lab|Product Optimization|Product Optimization Advanced,Intermediate,Mobile Development
+React Native Developer,Product Optimization Lab|Product Monitoring|Product Monitoring Advanced|Product Monitoring Lab|Product Automation|Product Automation Advanced,Intermediate,Mobile Development
+Flutter Developer,Product Automation Lab|Product Scaling|Product Scaling Advanced|Product Scaling Lab|Product Governance|Product Governance Advanced,Intermediate,Mobile Development
+Mobile QA Engineer,Product Governance Lab|Product Operations|Product Operations Advanced|Product Operations Lab|Product Debugging|Product Debugging Advanced,Intermediate,Mobile Development
+Mobile Platform Engineer,Product Debugging Lab|Product Integration|Product Integration Advanced|Product Integration Lab|Product Best Practices|Product Best Practices Advanced,Intermediate,Mobile Development
+Mobile Security Engineer,Product Best Practices Lab|Mobile Fundamentals|Mobile Fundamentals Advanced|Mobile Fundamentals Lab|Mobile Design|Mobile Design Advanced,Intermediate,Mobile Development
+Mobile Performance Engineer,Mobile Design Lab|Mobile Implementation|Mobile Implementation Advanced|Mobile Implementation Lab|Mobile Optimization|Mobile Optimization Advanced,Intermediate,Mobile Development
+Mobile DevOps Engineer,Mobile Optimization Lab|Mobile Monitoring|Mobile Monitoring Advanced|Mobile Monitoring Lab|Mobile Automation|Mobile Automation Advanced,Intermediate,Mobile Development
+Cross-Platform Engineer,Mobile Automation Lab|Mobile Scaling|Mobile Scaling Advanced|Mobile Scaling Lab|Mobile Governance|Mobile Governance Advanced,Intermediate,Mobile Development
+QA Engineer,Mobile Governance Lab|Mobile Operations|Mobile Operations Advanced|Mobile Operations Lab|Mobile Debugging|Mobile Debugging Advanced,Intermediate,QA & Testing
+Automation Test Engineer,Mobile Debugging Lab|Mobile Integration|Mobile Integration Advanced|Mobile Integration Lab|Mobile Best Practices|Mobile Best Practices Advanced,Intermediate,QA & Testing
+Performance Test Engineer,Mobile Best Practices Lab|Testing Fundamentals|Testing Fundamentals Advanced|Testing Fundamentals Lab|Testing Design|Testing Design Advanced,Intermediate,QA & Testing
+SDET,Testing Design Lab|Testing Implementation|Testing Implementation Advanced|Testing Implementation Lab|Testing Optimization|Testing Optimization Advanced,Intermediate,QA & Testing
+Quality Analyst,Testing Optimization Lab|Testing Monitoring|Testing Monitoring Advanced|Testing Monitoring Lab|Testing Automation|Testing Automation Advanced,Intermediate,QA & Testing
+Test Architect,Testing Automation Lab|Testing Scaling|Testing Scaling Advanced|Testing Scaling Lab|Testing Governance|Testing Governance Advanced,Intermediate,QA & Testing
+Reliability Test Engineer,Testing Governance Lab|Testing Operations|Testing Operations Advanced|Testing Operations Lab|Testing Debugging|Testing Debugging Advanced,Intermediate,QA & Testing
+API Test Engineer,Testing Debugging Lab|Testing Integration|Testing Integration Advanced|Testing Integration Lab|Testing Best Practices|Testing Best Practices Advanced,Intermediate,QA & Testing
+Security Test Engineer,Testing Best Practices Lab|Analytics Fundamentals|Analytics Fundamentals Advanced|Analytics Fundamentals Lab|Analytics Design|Analytics Design Advanced,Intermediate,QA & Testing
+Mobile Test Engineer,Analytics Design Lab|Analytics Implementation|Analytics Implementation Advanced|Analytics Implementation Lab|Analytics Optimization|Analytics Optimization Advanced,Intermediate,QA & Testing
+Software Architect,Analytics Optimization Lab|Analytics Monitoring|Analytics Monitoring Advanced|Analytics Monitoring Lab|Analytics Automation|Analytics Automation Advanced,Intermediate,Architecture
+Solution Architect,Analytics Automation Lab|Analytics Scaling|Analytics Scaling Advanced|Analytics Scaling Lab|Analytics Governance|Analytics Governance Advanced,Intermediate,Architecture
+Enterprise Architect,Analytics Governance Lab|Analytics Operations|Analytics Operations Advanced|Analytics Operations Lab|Analytics Debugging|Analytics Debugging Advanced,Intermediate,Architecture
+Cloud Architect,Analytics Debugging Lab|Analytics Integration|Analytics Integration Advanced|Analytics Integration Lab|Analytics Best Practices|Analytics Best Practices Advanced,Intermediate,Architecture
+Data Architect,Analytics Best Practices Lab|Architecture Fundamentals|Architecture Fundamentals Advanced|Architecture Fundamentals Lab|Architecture Design|Architecture Design Advanced,Intermediate,Architecture
+AI Architect,Architecture Design Lab|Architecture Implementation|Architecture Implementation Advanced|Architecture Implementation Lab|Architecture Optimization|Architecture Optimization Advanced,Intermediate,Architecture
+Integration Architect,Architecture Optimization Lab|Architecture Monitoring|Architecture Monitoring Advanced|Architecture Monitoring Lab|Architecture Automation|Architecture Automation Advanced,Intermediate,Architecture
+Security Architect,Architecture Automation Lab|Architecture Scaling|Architecture Scaling Advanced|Architecture Scaling Lab|Architecture Governance|Architecture Governance Advanced,Intermediate,Architecture
+Platform Architect,Architecture Governance Lab|Architecture Operations|Architecture Operations Advanced|Architecture Operations Lab|Architecture Debugging|Architecture Debugging Advanced,Intermediate,Architecture
+Systems Architect,Architecture Debugging Lab|Architecture Integration|Architecture Integration Advanced|Architecture Integration Lab|Architecture Best Practices|Architecture Best Practices Advanced,Intermediate,Architecture
+Network Engineer,Architecture Best Practices Lab|Networking Fundamentals|Networking Fundamentals Advanced|Networking Fundamentals Lab|Networking Design|Networking Design Advanced,Intermediate,Networking
+Network Automation Engineer,Networking Design Lab|Networking Implementation|Networking Implementation Advanced|Networking Implementation Lab|Networking Optimization|Networking Optimization Advanced,Intermediate,Networking
+Cloud Network Engineer,Networking Optimization Lab|Networking Monitoring|Networking Monitoring Advanced|Networking Monitoring Lab|Networking Automation|Networking Automation Advanced,Intermediate,Networking
+Network Security Engineer,Networking Automation Lab|Networking Scaling|Networking Scaling Advanced|Networking Scaling Lab|Networking Governance|Networking Governance Advanced,Intermediate,Networking
+SDN Engineer,Networking Governance Lab|Networking Operations|Networking Operations Advanced|Networking Operations Lab|Networking Debugging|Networking Debugging Advanced,Intermediate,Networking
+Wireless Engineer,Networking Debugging Lab|Networking Integration|Networking Integration Advanced|Networking Integration Lab|Networking Best Practices|Networking Best Practices Advanced,Intermediate,Networking
+Infrastructure Network Engineer,Networking Best Practices Lab|SRE Fundamentals|SRE Fundamentals Advanced|SRE Fundamentals Lab|SRE Design|SRE Design Advanced,Intermediate,Networking
+NOC Engineer,SRE Design Lab|SRE Implementation|SRE Implementation Advanced|SRE Implementation Lab|SRE Optimization|SRE Optimization Advanced,Intermediate,Networking
+Edge Network Engineer,SRE Optimization Lab|SRE Monitoring|SRE Monitoring Advanced|SRE Monitoring Lab|SRE Automation|SRE Automation Advanced,Intermediate,Networking
+Connectivity Engineer,SRE Automation Lab|SRE Scaling|SRE Scaling Advanced|SRE Scaling Lab|SRE Governance|SRE Governance Advanced,Intermediate,Networking
+CRM Developer,SRE Governance Lab|SRE Operations|SRE Operations Advanced|SRE Operations Lab|SRE Debugging|SRE Debugging Advanced,Intermediate,Business Systems
+ERP Engineer,SRE Debugging Lab|SRE Integration|SRE Integration Advanced|SRE Integration Lab|SRE Best Practices|SRE Best Practices Advanced,Intermediate,Business Systems
+Business Systems Analyst,SRE Best Practices Lab|Adaptive Skill 554|Adaptive Skill 555|Adaptive Skill 556|Adaptive Skill 557|Adaptive Skill 558,Intermediate,Business Systems
+Salesforce Developer,Adaptive Skill 559|Adaptive Skill 560|Python|JavaScript|TypeScript|Java,Intermediate,Business Systems
+Dynamics Engineer,Go|Rust|C#|C++|SQL|NoSQL,Intermediate,Business Systems
+SAP Consultant,React|Vue|Angular|Node.js|Express|FastAPI,Intermediate,Business Systems
+Workflow Automation Engineer,Django|Flask|MongoDB|PostgreSQL|MySQL|Redis,Intermediate,Business Systems
+Process Optimization Analyst,Kafka|RabbitMQ|Docker|Kubernetes|Terraform|AWS,Intermediate,Business Systems
+Enterprise Integrations Specialist,Azure|GCP|CI/CD|Git|Linux|System Design,Intermediate,Business Systems
+Operations Systems Engineer,Microservices|GraphQL|REST API|NLP|Computer Vision|MLOps,Intermediate,Business Systems
+UX Designer,Data Modeling|ETL|Feature Engineering|Pandas|NumPy|scikit-learn,Intermediate,Design & UX
+Product Designer,PyTorch|TensorFlow|Prompt Engineering|Frontend Fundamentals|Frontend Fundamentals Advanced|Frontend Fundamentals Lab,Intermediate,Design & UX
+UX Researcher,Frontend Design|Frontend Design Advanced|Frontend Design Lab|Frontend Implementation|Frontend Implementation Advanced|Frontend Implementation Lab,Intermediate,Design & UX
+Design Technologist,Frontend Optimization|Frontend Optimization Advanced|Frontend Optimization Lab|Frontend Monitoring|Frontend Monitoring Advanced|Frontend Monitoring Lab,Intermediate,Design & UX
+Interaction Designer,Frontend Automation|Frontend Automation Advanced|Frontend Automation Lab|Frontend Scaling|Frontend Scaling Advanced|Frontend Scaling Lab,Intermediate,Design & UX
+Design Systems Engineer,Frontend Governance|Frontend Governance Advanced|Frontend Governance Lab|Frontend Operations|Frontend Operations Advanced|Frontend Operations Lab,Intermediate,Design & UX
+Accessibility Specialist,Frontend Debugging|Frontend Debugging Advanced|Frontend Debugging Lab|Frontend Integration|Frontend Integration Advanced|Frontend Integration Lab,Intermediate,Design & UX
+Visual Designer,Frontend Best Practices|Frontend Best Practices Advanced|Frontend Best Practices Lab|Backend Fundamentals|Backend Fundamentals Advanced|Backend Fundamentals Lab,Intermediate,Design & UX
+Service Designer,Backend Design|Backend Design Advanced|Backend Design Lab|Backend Implementation|Backend Implementation Advanced|Backend Implementation Lab,Intermediate,Design & UX
+Experience Strategist,Backend Optimization|Backend Optimization Advanced|Backend Optimization Lab|Backend Monitoring|Backend Monitoring Advanced|Backend Monitoring Lab,Intermediate,Design & UX
+Engineering Manager,Backend Automation|Backend Automation Advanced|Backend Automation Lab|Backend Scaling|Backend Scaling Advanced|Backend Scaling Lab,Intermediate,Leadership
+Data Science Manager,Backend Governance|Backend Governance Advanced|Backend Governance Lab|Backend Operations|Backend Operations Advanced|Backend Operations Lab,Intermediate,Leadership
+Director of Engineering,Backend Debugging|Backend Debugging Advanced|Backend Debugging Lab|Backend Integration|Backend Integration Advanced|Backend Integration Lab,Intermediate,Leadership
+Head of Platform,Backend Best Practices|Backend Best Practices Advanced|Backend Best Practices Lab|Data Fundamentals|Data Fundamentals Advanced|Data Fundamentals Lab,Intermediate,Leadership
+AI Program Lead,Data Design|Data Design Advanced|Data Design Lab|Data Implementation|Data Implementation Advanced|Data Implementation Lab,Intermediate,Leadership
+Technical Lead,Data Optimization|Data Optimization Advanced|Data Optimization Lab|Data Monitoring|Data Monitoring Advanced|Data Monitoring Lab,Intermediate,Leadership
+Principal Engineer,Data Automation|Data Automation Advanced|Data Automation Lab|Data Scaling|Data Scaling Advanced|Data Scaling Lab,Intermediate,Leadership
+Architecture Lead,Data Governance|Data Governance Advanced|Data Governance Lab|Data Operations|Data Operations Advanced|Data Operations Lab,Intermediate,Leadership
+Delivery Manager,Data Debugging|Data Debugging Advanced|Data Debugging Lab|Data Integration|Data Integration Advanced|Data Integration Lab,Intermediate,Leadership
+R&D Lead,Data Best Practices|Data Best Practices Advanced|Data Best Practices Lab|Cloud Fundamentals|Cloud Fundamentals Advanced|Cloud Fundamentals Lab,Intermediate,Leadership
