@@ -4,7 +4,6 @@ import {
   Zap, 
   BookOpen, 
   TrendingUp, 
-  Settings, 
   LogOut, 
   Share2, 
   Bell, 
@@ -27,7 +26,6 @@ export function Sidebar({ currentScreen, onScreenChange }: SidebarProps) {
     { id: 'learning', icon: BookOpen, label: 'Skill Synthesis' },
     { id: 'career', icon: TrendingUp, label: 'Evolution Path' },
     { id: 'export', icon: Share2, label: 'Export Profile' },
-    { id: 'settings', icon: Settings, label: 'Neural Config' },
   ];
 
   return (

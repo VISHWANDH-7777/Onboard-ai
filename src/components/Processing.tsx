@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle, Database, Network } from 'lucide-react';
+import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { GlassCard, cn } from './UI';
-import { analyzeNeuralProfile } from '../services/geminiService';
-import { AnalysisResult } from '../types';
+import { analyze } from '../services/api';
+import { AnalysisSummary } from '../types';
 
 interface ProcessingProps {
-  resumeText: string;
-  roleRequirements: string;
-  onComplete: (result: AnalysisResult) => void;
+  payload: {
+    resumeText: string;
+    jobDescription: string;
+    targetRole: string;
+    experienceLevel: string;
+  };
+  onComplete: (result: AnalysisSummary) => void;
 }
 
-export function Processing({ resumeText, roleRequirements, onComplete }: ProcessingProps) {
+export function Processing({ payload, onComplete }: ProcessingProps) {
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +42,7 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
           });
         }, 500);
 
-        const result = await analyzeNeuralProfile(resumeText, roleRequirements);
+        const result = await analyze(payload);
         
         clearInterval(progressInterval);
         
@@ -52,7 +56,8 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
       } catch (err) {
         console.error('Neural Synthesis Error:', err);
         if (isMounted) {
-          setError('Neural synthesis failed. Please check your connection and try again.');
+          const message = err instanceof Error ? err.message : 'Neural synthesis failed. Please check your connection and try again.';
+          setError(message);
         }
       }
     };
@@ -62,7 +67,7 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
     return () => {
       isMounted = false;
     };
-  }, [resumeText, roleRequirements, onComplete]);
+  }, [payload, onComplete]);
 
   if (error) {
     return (
