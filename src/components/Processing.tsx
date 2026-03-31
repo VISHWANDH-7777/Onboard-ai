@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle, Database, Network } from 'lucide-react';
 import { GlassCard, cn } from './UI';
-import { analyze } from '../services/api';
-import { AnalysisSummary } from '../types';
+import { analyzeNeuralProfile } from '../services/geminiService';
+import { AnalysisResult } from '../types';
 
 interface ProcessingProps {
-  payload: {
-    resumeText: string;
-    jobDescription: string;
-    targetRole: string;
-    experienceLevel: string;
-  };
-  onComplete: (result: AnalysisSummary) => void;
+  resumeText: string;
+  roleRequirements: string;
+  onComplete: (result: AnalysisResult) => void;
 }
 
-export function Processing({ payload, onComplete }: ProcessingProps) {
+export function Processing({ resumeText, roleRequirements, onComplete }: ProcessingProps) {
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +38,7 @@ export function Processing({ payload, onComplete }: ProcessingProps) {
           });
         }, 500);
 
-        const result = await analyze(payload);
+        const result = await analyzeNeuralProfile(resumeText, roleRequirements);
         
         clearInterval(progressInterval);
         
@@ -56,8 +52,7 @@ export function Processing({ payload, onComplete }: ProcessingProps) {
       } catch (err) {
         console.error('Neural Synthesis Error:', err);
         if (isMounted) {
-          const message = err instanceof Error ? err.message : 'Neural synthesis failed. Please check your connection and try again.';
-          setError(message);
+          setError('Neural synthesis failed. Please check your connection and try again.');
         }
       }
     };
@@ -67,7 +62,7 @@ export function Processing({ payload, onComplete }: ProcessingProps) {
     return () => {
       isMounted = false;
     };
-  }, [payload, onComplete]);
+  }, [resumeText, roleRequirements, onComplete]);
 
   if (error) {
     return (

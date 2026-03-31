@@ -15,20 +15,13 @@ import {
 import { GlassCard, Button, cn } from './UI';
 
 interface AnalysisProps {
-  onStart: (payload: {
-    resumeText: string;
-    jobDescription: string;
-    targetRole: string;
-    experienceLevel: string;
-  }) => void;
+  onStart: (resumeText: string, roleRequirements: string) => void;
 }
 
 export function Analysis({ onStart }: AnalysisProps) {
   const [file, setFile] = useState<File | null>(null);
   const [resumeText, setResumeText] = useState('');
   const [roleRequirements, setRoleRequirements] = useState('');
-  const [targetRole, setTargetRole] = useState('');
-  const [experienceLevel, setExperienceLevel] = useState('Intermediate');
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDrop = (e: React.DragEvent) => {
@@ -151,8 +144,6 @@ export function Analysis({ onStart }: AnalysisProps) {
               <input 
                 type="text" 
                 placeholder="e.g. Senior AI Architect" 
-                value={targetRole}
-                onChange={(e) => setTargetRole(e.target.value)}
                 className="w-full bg-surface-bright/50 border border-white/5 rounded-xl py-3 px-4 outline-none focus:border-secondary/50 focus:bg-surface-bright transition-all text-sm"
               />
             </div>
@@ -170,15 +161,11 @@ export function Analysis({ onStart }: AnalysisProps) {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-xs font-headline font-medium text-on-surface-variant uppercase tracking-widest">Experience Threshold</label>
-                <select
-                  value={experienceLevel}
-                  onChange={(e) => setExperienceLevel(e.target.value)}
-                  className="w-full bg-surface-bright/50 border border-white/5 rounded-xl py-3 px-4 outline-none focus:border-secondary/50 focus:bg-surface-bright transition-all text-sm"
-                >
-                  <option value="Junior">Junior (1-3 yrs)</option>
-                  <option value="Intermediate">Mid-Level (3-5 yrs)</option>
+                <select className="w-full bg-surface-bright/50 border border-white/5 rounded-xl py-3 px-4 outline-none focus:border-secondary/50 focus:bg-surface-bright transition-all text-sm">
+                  <option>Junior (1-3 yrs)</option>
+                  <option>Mid-Level (3-5 yrs)</option>
                   <option value="Senior">Senior (5-8 yrs)</option>
-                  <option value="Principal">Principal (8+ yrs)</option>
+                  <option>Principal (8+ yrs)</option>
                 </select>
               </div>
               <div className="space-y-2">
@@ -198,15 +185,8 @@ export function Analysis({ onStart }: AnalysisProps) {
         <Button 
           size="lg" 
           className="px-12 flex items-center gap-3 group"
-          onClick={() =>
-            onStart({
-              resumeText,
-              jobDescription: roleRequirements,
-              targetRole,
-              experienceLevel,
-            })
-          }
-          disabled={!resumeText || !roleRequirements || !targetRole}
+          onClick={() => onStart(resumeText, roleRequirements)}
+          disabled={!resumeText || !roleRequirements}
         >
           <Zap className="w-5 h-5 group-hover:animate-pulse" />
           Initiate Neural Synthesis

@@ -1,31 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { Cpu, Mail, Key, Chrome, UserPlus, ArrowRight } from 'lucide-react';
 import { GlassCard, Button } from './UI';
 
 interface LoginProps {
-  onLogin: (email: string, password: string) => Promise<void>;
+  onLogin: () => void;
 }
 
 export function Login({ onLogin }: LoginProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const submit = async () => {
-    try {
-      setError('');
-      setLoading(true);
-      await onLogin(email, password);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : 'Login failed';
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-surface flex items-center justify-center p-6 relative overflow-hidden">
       {/* Background elements */}
@@ -61,8 +43,6 @@ export function Login({ onLogin }: LoginProps) {
                 <input 
                   type="email" 
                   placeholder="vishwa@nebula.ai" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-surface-bright/50 border border-white/5 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-primary/50 focus:bg-surface-bright transition-all text-sm"
                 />
               </div>
@@ -75,22 +55,17 @@ export function Login({ onLogin }: LoginProps) {
                 <input 
                   type="password" 
                   placeholder="••••••••••••" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-surface-bright/50 border border-white/5 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-primary/50 focus:bg-surface-bright transition-all text-sm"
                 />
               </div>
             </div>
           </div>
 
-          {error && <p className="text-xs text-tertiary">{error}</p>}
-
           <Button 
             className="w-full py-4 flex items-center justify-center gap-2 group"
-            onClick={submit}
-            disabled={loading || !email || !password}
+            onClick={onLogin}
           >
-            {loading ? 'Authenticating...' : 'Authenticate Profile'}
+            Authenticate Profile
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
 

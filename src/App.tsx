@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  type AnalysisSummary,
-  type CareerPath,
-  type DashboardResponse,
-  type HistoryResponse,
-  type LearningModule,
-  type ResultResponse,
-  type Screen,
-} from './types';
+import { type Screen, type AnalysisResult } from './types';
 import { Sidebar, Topbar } from './components/Navigation';
 import { Login } from './components/Login';
 import { Dashboard } from './components/Dashboard';
@@ -17,149 +9,76 @@ import { Processing } from './components/Processing';
 import { Results } from './components/Results';
 import { Learning } from './components/Learning';
 import { Career } from './components/Career';
+import { SettingsScreen } from './components/Settings';
 import { Export } from './components/Export';
-import {
-  compareAnalyses,
-  exportReport,
-  getCareer,
-  getDashboard,
-  getHistory,
-  getLearning,
-  getResult,
-  login,
-  rerunAnalysis,
-} from './services/api';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('login');
-  const [analysisPayload, setAnalysisPayload] = useState({
-    resumeText: '',
-    jobDescription: '',
-    targetRole: '',
-    experienceLevel: 'Intermediate',
-  });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [resumeText, setResumeText] = useState('');
+  const [roleRequirements, setRoleRequirements] = useState('');
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
 
-  const [currentAnalysisId, setCurrentAnalysisId] = useState('');
-  const [result, setResult] = useState<ResultResponse | null>(null);
-  const [learningModules, setLearningModules] = useState<LearningModule[]>([]);
-  const [careerPath, setCareerPath] = useState<CareerPath | null>(null);
-  const [dashboard, setDashboard] = useState<DashboardResponse | null>(null);
-  const [history, setHistory] = useState<HistoryResponse['items']>([]);
-  const [exportState, setExportState] = useState<{
-    message?: string;
-    fileName?: string;
-    reportPath?: string;
-    shareLink?: string;
-    saved?: boolean;
-  } | null>(null);
-
-  const loadUserData = async (uid: string) => {
-    const [dash, hist] = await Promise.all([getDashboard(uid), getHistory(uid)]);
-    setDashboard(dash);
-    setHistory(hist.items);
-  };
-
-  const loadAnalysisData = async (analysisId: string) => {
-    const [resultRes, learningRes, careerRes] = await Promise.all([
-      getResult(analysisId),
-      getLearning(analysisId),
-      getCareer(analysisId),
-    ]);
-
-    setResult(resultRes);
-    setLearningModules(learningRes.learningModules);
-    setCareerPath(careerRes);
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('nebula_token');
-    const uid = localStorage.getItem('nebula_user_id');
-    if (token && uid) {
-      setScreen('dashboard');
-      loadUserData(uid).catch(() => undefined);
-    }
-  }, []);
-
-  const handleLogin = async (email: string, password: string) => {
-    const auth = await login(email, password);
-    await loadUserData(auth.user.userId);
+  // Handle login
+  const handleLogin = () => {
     setScreen('dashboard');
   };
 
-  const handleStartAnalysis = (payload: {
-    resumeText: string;
-    jobDescription: string;
-    targetRole: string;
-    experienceLevel: string;
-  }) => {
-    setAnalysisPayload(payload);
+  // Handle analysis start
+  const handleStartAnalysis = (text: string, requirements: string) => {
+    setResumeText(text);
+    setRoleRequirements(requirements);
     setScreen('processing');
   };
 
-  const handleAnalysisComplete = async (summary: AnalysisSummary) => {
-    setCurrentAnalysisId(summary.analysisId);
-    await loadAnalysisData(summary.analysisId);
-    const uid = localStorage.getItem('nebula_user_id') || '';
-    if (uid) {
-      await loadUserData(uid);
-    }
+  // Handle analysis completion
+  const handleAnalysisComplete = (result: AnalysisResult) => {
+    setAnalysisResult(result);
     setScreen('results');
   };
 
-  const handleViewResult = async (analysisId: string) => {
-    setCurrentAnalysisId(analysisId);
-    await loadAnalysisData(analysisId);
-    setScreen('results');
-  };
-
-  const handleRerun = async () => {
-    if (!currentAnalysisId) return;
-    const rerun = await rerunAnalysis(currentAnalysisId);
-    await handleViewResult(rerun.analysisId);
-  };
-
-  const handleCompareLatest = async () => {
-    if (history.length < 2) return;
-    const latest = history[0].analysisId;
-    const previous = history[1].analysisId;
-    const comparison = await compareAnalyses(previous, latest);
-    alert(`Score delta between latest two analyses: ${comparison.scoreDelta.toFixed(2)}%`);
-  };
-
-  const handleExport = async () => {
-    if (!currentAnalysisId) return;
-    const response = await exportReport(currentAnalysisId);
-    setExportState(response);
-  };
-
+  // Render the current screen
   const renderScreen = () => {
     switch (screen) {
       case 'login':
         return <Login onLogin={handleLogin} />;
       case 'dashboard':
-        return (
-          <Dashboard
-            dashboard={dashboard}
-            history={history}
-            onNewAnalysis={() => setScreen('analysis')}
-            onViewResult={handleViewResult}
-            onCompareLatest={handleCompareLatest}
-          />
-        );
+        return <Dashboard />;
       case 'analysis':
         return <Analysis onStart={handleStartAnalysis} />;
       case 'processing':
-        return <Processing payload={analysisPayload} onComplete={handleAnalysisComplete} />;
+        return (
+          <Processing 
+            resumeText={resumeText} 
+            roleRequirements={roleRequirements} 
+            onComplete={handleAnalysisComplete} 
+          />
+        );
       case 'results':
-        return <Results result={result} analysisId={currentAnalysisId} onRerun={handleRerun} />;
+        return <Results result={analysisResult} />;
       case 'learning':
-        return <Learning modules={learningModules} />;
+        return <Learning />;
       case 'career':
-        return <Career career={careerPath} />;
+        return <Career />;
+      case 'settings':
+        return <SettingsScreen />;
       case 'export':
-        return <Export analysisId={currentAnalysisId} exportState={exportState} onExport={handleExport} />;
+        return <Export />;
       default:
-        return null;
+        return (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center space-y-4">
+              <h2 className="text-2xl font-headline font-bold text-on-surface-variant">Neural Module Under Construction</h2>
+              <p className="text-on-surface-variant/50">This capability is being synthesized in the next evolution cycle.</p>
+              <button 
+                onClick={() => setScreen('dashboard')}
+                className="text-primary font-headline font-bold hover:underline"
+              >
+                Return to Command Center
+              </button>
+            </div>
+          </div>
+        );
     }
   };
 
@@ -170,10 +89,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-surface text-on-surface font-sans selection:bg-primary/30 selection:text-primary-bright">
       <Sidebar currentScreen={screen} onScreenChange={setScreen} />
-
+      
       <div className="pl-64 min-h-screen flex flex-col">
         <Topbar />
-
+        
         <main className="flex-1 mt-20 p-8 overflow-x-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -181,13 +100,25 @@ export default function App() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="max-w-7xl mx-auto w-full"
             >
               {renderScreen()}
             </motion.div>
           </AnimatePresence>
         </main>
+
+        <footer className="p-8 border-t border-white/5 text-center">
+          <p className="text-[10px] text-on-surface-variant uppercase tracking-[0.2em] font-headline font-bold opacity-30">
+            Nebula AI • Adaptive Onboarding Engine • v2.5.4-beta
+          </p>
+        </footer>
+      </div>
+
+      {/* Global background effects */}
+      <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div className="absolute top-[20%] left-[10%] w-[30%] h-[30%] bg-primary/5 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[20%] right-[10%] w-[30%] h-[30%] bg-secondary/5 rounded-full blur-[120px]"></div>
       </div>
     </div>
   );
