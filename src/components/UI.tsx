@@ -37,6 +37,7 @@ export interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   id?: string;
+  title?: string;
 }
 
 export function Button({ 

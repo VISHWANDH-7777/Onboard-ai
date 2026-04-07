@@ -23,6 +23,56 @@ export function Analysis({ onStart }: AnalysisProps) {
   const [resumeText, setResumeText] = useState('');
   const [roleRequirements, setRoleRequirements] = useState('');
   const [isDragging, setIsDragging] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [validationMessage, setValidationMessage] = useState<string | null>(null);
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+
+  const trimmedResumeText = resumeText.trim();
+  const trimmedRoleRequirements = roleRequirements.trim();
+  const isResumeValid = Boolean(file) || trimmedResumeText !== '';
+  const isJDValid = trimmedRoleRequirements !== '';
+  const isFormValid = isResumeValid && isJDValid;
+
+  const normalizeExtractedResume = (text: string) => {
+    const normalized = text.replace(/\s+/g, ' ').trim();
+    return normalized;
+  };
+
+  const extractResumeFromFile = async (selectedFile: File) => {
+    const text = await selectedFile.text();
+    return normalizeExtractedResume(text);
+  };
+
+  const handleStart = async () => {
+    setAttemptedSubmit(true);
+    setValidationMessage(null);
+
+    if (!isFormValid) {
+      setValidationMessage('Please provide both Resume and Job Description.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      let finalResumeText = trimmedResumeText;
+
+      if (!finalResumeText && file) {
+        finalResumeText = await extractResumeFromFile(file);
+      }
+
+      if (!finalResumeText || !trimmedRoleRequirements) {
+        setValidationMessage('Resume and Job Description are required.');
+        return;
+      }
+
+      onStart(finalResumeText, trimmedRoleRequirements);
+    } catch (error) {
+      setValidationMessage(error instanceof Error ? error.message : 'Unable to read resume file. Please paste resume text.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -92,7 +142,12 @@ export function Analysis({ onStart }: AnalysisProps) {
                   <p className="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">{(file.size / 1024).toFixed(1)} KB • Ready for Synthesis</p>
                 </div>
                 <button 
-                  onClick={(e) => { e.stopPropagation(); setFile(null); setResumeText(''); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFile(null);
+                    setResumeText('');
+                    setValidationMessage(null);
+                  }}
                   className="absolute top-4 right-4 p-2 rounded-lg hover:bg-white/10 text-on-surface-variant hover:text-tertiary transition-all"
                 >
                   <X className="w-4 h-4" />
@@ -118,10 +173,21 @@ export function Analysis({ onStart }: AnalysisProps) {
             <label className="text-xs font-headline font-medium text-on-surface-variant uppercase tracking-widest">Resume Content (Alternative)</label>
             <textarea 
               value={resumeText}
-              onChange={(e) => setResumeText(e.target.value)}
+              onChange={(e) => {
+                setResumeText(e.target.value);
+                if (validationMessage) {
+                  setValidationMessage(null);
+                }
+              }}
               placeholder="Paste your resume text here if you don't have a file..." 
-              className="w-full h-32 bg-surface-bright/50 border border-white/5 rounded-xl py-3 px-4 outline-none focus:border-primary/50 focus:bg-surface-bright transition-all text-sm resize-none"
+              className={cn(
+                "w-full h-32 bg-surface-bright/50 border rounded-xl py-3 px-4 outline-none focus:border-primary/50 focus:bg-surface-bright transition-all text-sm resize-none",
+                attemptedSubmit && !isResumeValid ? "border-tertiary/60" : "border-white/5"
+              )}
             ></textarea>
+            {attemptedSubmit && !isResumeValid && (
+              <p className="text-xs text-tertiary">Resume is required. Upload a file or paste resume text.</p>
+            )}
           </div>
 
           <div className="p-4 rounded-xl bg-tertiary/5 border border-tertiary/10 flex gap-4">
@@ -152,10 +218,21 @@ export function Analysis({ onStart }: AnalysisProps) {
               <label className="text-xs font-headline font-medium text-on-surface-variant uppercase tracking-widest">Job Description / Context</label>
               <textarea 
                 value={roleRequirements}
-                onChange={(e) => setRoleRequirements(e.target.value)}
+                onChange={(e) => {
+                  setRoleRequirements(e.target.value);
+                  if (validationMessage) {
+                    setValidationMessage(null);
+                  }
+                }}
                 placeholder="Paste the role context or neural requirements here..." 
-                className="w-full h-48 bg-surface-bright/50 border border-white/5 rounded-xl py-3 px-4 outline-none focus:border-secondary/50 focus:bg-surface-bright transition-all text-sm resize-none"
+                className={cn(
+                  "w-full h-48 bg-surface-bright/50 border rounded-xl py-3 px-4 outline-none focus:border-secondary/50 focus:bg-surface-bright transition-all text-sm resize-none",
+                  attemptedSubmit && !isJDValid ? "border-tertiary/60" : "border-white/5"
+                )}
               ></textarea>
+              {attemptedSubmit && !isJDValid && (
+                <p className="text-xs text-tertiary">Job Description is required.</p>
+              )}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -182,16 +259,20 @@ export function Analysis({ onStart }: AnalysisProps) {
       </div>
 
       <div className="pt-6 flex justify-center">
+        <div className="w-full max-w-md space-y-3">
+          {validationMessage && <p className="text-sm text-tertiary text-center">{validationMessage}</p>}
         <Button 
           size="lg" 
-          className="px-12 flex items-center gap-3 group"
-          onClick={() => onStart(resumeText, roleRequirements)}
-          disabled={!resumeText || !roleRequirements}
+          className="w-full px-12 flex items-center justify-center gap-3 group"
+          onClick={handleStart}
+          disabled={!isFormValid || isSubmitting}
+          title="Resume + JD required to proceed"
         >
           <Zap className="w-5 h-5 group-hover:animate-pulse" />
           Initiate Neural Synthesis
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </Button>
+        </div>
       </div>
     </div>
   );

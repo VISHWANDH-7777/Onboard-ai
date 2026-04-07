@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle, Database, Network } from 'lucide-react';
+import { BrainCircuit, Cpu, Zap, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { GlassCard, cn } from './UI';
-import { analyzeNeuralProfile } from '../services/geminiService';
 import { AnalysisResult } from '../types';
 
 interface ProcessingProps {
   resumeText: string;
   roleRequirements: string;
   onComplete: (result: AnalysisResult) => void;
+  onAnalyze: (resumeText: string, roleRequirements: string) => Promise<AnalysisResult>;
+  onRetry: () => void;
 }
 
-export function Processing({ resumeText, roleRequirements, onComplete }: ProcessingProps) {
+export function Processing({ resumeText, roleRequirements, onComplete, onAnalyze, onRetry }: ProcessingProps) {
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -25,12 +26,17 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
 
   useEffect(() => {
     let isMounted = true;
+    let progressInterval: ReturnType<typeof setInterval> | null = null;
 
     const runAnalysis = async () => {
       try {
         // Simulate progress while waiting for API
-        const progressInterval = setInterval(() => {
-          setProgress(prev => {
+        progressInterval = setInterval(() => {
+          if (!isMounted) {
+            return;
+          }
+
+          setProgress((prev) => {
             if (prev >= 90) return prev;
             const next = prev + Math.random() * 5;
             setCurrentStep(Math.min(Math.floor((next / 100) * steps.length), steps.length - 1));
@@ -38,9 +44,11 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
           });
         }, 500);
 
-        const result = await analyzeNeuralProfile(resumeText, roleRequirements);
+        const result = await onAnalyze(resumeText, roleRequirements);
         
-        clearInterval(progressInterval);
+        if (progressInterval) {
+          clearInterval(progressInterval);
+        }
         
         if (isMounted) {
           setProgress(100);
@@ -61,8 +69,11 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
 
     return () => {
       isMounted = false;
+      if (progressInterval) {
+        clearInterval(progressInterval);
+      }
     };
-  }, [resumeText, roleRequirements, onComplete]);
+  }, [resumeText, roleRequirements, onComplete, onAnalyze]);
 
   if (error) {
     return (
@@ -75,10 +86,10 @@ export function Processing({ resumeText, roleRequirements, onComplete }: Process
           <p className="text-on-surface-variant">{error}</p>
         </div>
         <button 
-          onClick={() => window.location.reload()}
+          onClick={onRetry}
           className="px-8 py-3 bg-surface-bright border border-white/10 rounded-xl font-headline font-bold hover:bg-white/5 transition-all"
         >
-          Restart Neural Engine
+          Back to Analysis
         </button>
       </div>
     );

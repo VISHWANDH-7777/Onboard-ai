@@ -16,7 +16,12 @@ import {
 } from 'lucide-react';
 import { GlassCard, Button, cn } from './UI';
 
-export function SettingsScreen() {
+interface SettingsScreenProps {
+  onResetAllData: () => Promise<void>;
+  isResetting: boolean;
+}
+
+export function SettingsScreen({ onResetAllData, isResetting }: SettingsScreenProps) {
   const sections = [
     { 
       id: 'profile', 
@@ -64,8 +69,13 @@ export function SettingsScreen() {
           <p className="text-on-surface-variant font-medium">Configure your adaptive intelligence profile and interface.</p>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="flex items-center gap-2">
-            Reset Config
+          <Button
+            variant="outline"
+            className="flex items-center gap-2"
+            onClick={onResetAllData}
+            disabled={isResetting}
+          >
+            Reset All Data
           </Button>
           <Button className="flex items-center gap-2">
             <Zap className="w-4 h-4" />

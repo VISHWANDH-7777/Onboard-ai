@@ -34,33 +34,21 @@ interface ResultsProps {
   result: AnalysisResult | null;
 }
 
-const defaultResult: AnalysisResult = {
-  score: 84,
-  skills: [
-    { name: 'PyTorch', level: 95, status: 'mastered' },
-    { name: 'System Design', level: 82, status: 'developing' },
-    { name: 'AI Ethics', level: 45, status: 'gap' },
-  ],
-  reasoning: "Exceptional technical depth in AI/ML architectures. Strong alignment with leadership requirements. Minor gap identified in ML Ops automation.",
-  distribution: [
-    { subject: 'Technical Depth', A: 120, B: 110, fullMark: 150 },
-    { subject: 'System Design', A: 98, B: 130, fullMark: 150 },
-    { subject: 'Leadership', A: 86, B: 130, fullMark: 150 },
-    { subject: 'Problem Solving', A: 99, B: 100, fullMark: 150 },
-    { subject: 'Communication', A: 85, B: 90, fullMark: 150 },
-    { subject: 'AI/ML Ethics', A: 65, B: 85, fullMark: 150 },
-  ],
-  benchmarking: [
-    { name: 'Python', current: 95, target: 80 },
-    { name: 'PyTorch', current: 88, target: 75 },
-    { name: 'System Arch', current: 82, target: 85 },
-    { name: 'NLP', current: 92, target: 70 },
-    { name: 'Cloud Ops', current: 75, target: 82 },
-  ]
-};
-
 export function Results({ result }: ResultsProps) {
-  const data = result || defaultResult;
+  if (!result) {
+    return (
+      <div className="max-w-2xl mx-auto p-8 rounded-2xl bg-surface-high/60 border border-white/5 text-center space-y-3">
+        <h2 className="font-headline font-bold text-2xl">No Result Available</h2>
+        <p className="text-on-surface-variant text-sm">Run a new analysis to view live match score, skills, and improvement suggestions.</p>
+      </div>
+    );
+  }
+
+  const data = result;
+  const gapSkills = data.skills.filter((skill) => skill.status === 'gap').map((skill) => skill.name);
+  const suggestions = gapSkills.length
+    ? gapSkills.map((skill) => `Improve ${skill} through targeted projects and role-specific practice.`)
+    : ['No critical skill gaps detected. Focus on keeping mastered areas current.'];
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -143,7 +131,7 @@ export function Results({ result }: ResultsProps) {
           <div className="mt-8 pt-8 border-t border-white/5 w-full text-left">
             <h3 className="font-headline font-bold text-lg mb-4">Neural Insights</h3>
             <div className="text-xs text-on-surface-variant leading-relaxed space-y-4">
-              {data.reasoning.split('. ').map((insight, i) => (
+              {data.reasoning.split('. ').filter(Boolean).map((insight, i) => (
                 <div key={i} className="flex gap-3">
                   <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                   <p>{insight}.</p>
@@ -231,13 +219,13 @@ export function Results({ result }: ResultsProps) {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
                 <TrendingUp className="w-5 h-5 text-tertiary" />
-                <h2 className="font-headline font-semibold text-xl">Evolutionary Path</h2>
+                <h2 className="font-headline font-semibold text-xl">Suggestions</h2>
               </div>
               <div className="flex items-center gap-2 text-xs font-headline font-medium text-on-surface-variant">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
-                Current State
+                Prioritized Actions
                 <span className="w-2 h-2 rounded-full bg-secondary ml-4"></span>
-                Target State
+                Skill Status
               </div>
             </div>
 
@@ -257,6 +245,14 @@ export function Results({ result }: ResultsProps) {
                     <span>Level: {skill.level}%</span>
                     <span className="capitalize">{skill.status}</span>
                   </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 space-y-3">
+              {suggestions.map((suggestion, index) => (
+                <div key={index} className="p-4 rounded-xl bg-surface-bright border border-white/5 text-sm text-on-surface-variant">
+                  {suggestion}
                 </div>
               ))}
             </div>

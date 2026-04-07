@@ -10,7 +10,8 @@ import {
   Bell, 
   Search,
   User,
-  Cpu
+  Cpu,
+  History
 } from 'lucide-react';
 import { type Screen } from '../types';
 import { cn } from './UI';
@@ -24,6 +25,7 @@ export function Sidebar({ currentScreen, onScreenChange }: SidebarProps) {
   const menuItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'analysis', icon: Zap, label: 'Neural Analysis' },
+    { id: 'history', icon: History, label: 'History' },
     { id: 'learning', icon: BookOpen, label: 'Skill Synthesis' },
     { id: 'career', icon: TrendingUp, label: 'Evolution Path' },
     { id: 'export', icon: Share2, label: 'Export Profile' },
@@ -73,7 +75,12 @@ export function Sidebar({ currentScreen, onScreenChange }: SidebarProps) {
   );
 }
 
-export function Topbar() {
+interface TopbarProps {
+  userName: string;
+  userEmail: string;
+}
+
+export function Topbar({ userName, userEmail }: TopbarProps) {
   return (
     <header className="h-20 bg-surface/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 fixed top-0 right-0 left-64 z-40">
       <div className="flex items-center gap-4 bg-surface-high/50 border border-white/5 rounded-xl px-4 py-2 w-96">
@@ -93,8 +100,8 @@ export function Topbar() {
         
         <div className="flex items-center gap-3 pl-6 border-l border-white/5">
           <div className="text-right">
-            <p className="text-sm font-headline font-medium">Vishwa Star</p>
-            <p className="text-[10px] text-on-surface-variant uppercase tracking-widest">Senior AI Architect</p>
+            <p className="text-sm font-headline font-medium">{userName || 'Guest User'}</p>
+            <p className="text-[10px] text-on-surface-variant uppercase tracking-widest">{userEmail || 'Authenticated Session'}</p>
           </div>
           <div className="w-10 h-10 rounded-xl bg-surface-bright border border-white/10 flex items-center justify-center overflow-hidden">
             <User className="w-6 h-6 text-on-surface-variant" />
